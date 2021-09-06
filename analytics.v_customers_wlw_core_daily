@@ -1,0 +1,8 @@
+Select a.d_date
+     , b.company_id
+     , b.customer_id
+from reporting.dim_date a
+   , reporting.v_customer_contract_history b
+where a.d_date between b.valid_from and b.valid_to
+  and sales_product_id = 1
+  and platform_id = 1
