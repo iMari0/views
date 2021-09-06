@@ -1,8 +1,11 @@
-Select a.d_date
-     , b.company_id
-     , b.customer_id
-from reporting.dim_date a
-   , reporting.v_customer_contract_history b
-where a.d_date between b.valid_from and b.valid_to
-  and sales_product_id = 1
-  and platform_id = 1
+
+SELECT DISTINCT dd.d_date AS date
+              , h.company_id
+              , h.customer_id
+              , h.company_uuid
+FROM reporting.dim_date dd
+         JOIN reporting.v_customer_contract_history h
+              ON dd.d_date >= h.valid_from AND dd.d_date <= h.valid_to AND h.sales_product_id = 1 AND h.platform_id = 1
+WHERE 1 = 1
+  AND dd.d_date >= '2018-01-01'::date
+  AND dd.d_date <= 'now'::text::date
